@@ -4,8 +4,7 @@ precision mediump float;
 #endif
 
 
-uniform sampler2D   u_tex0;
-uniform vec2        u_tex0Resolution;
+uniform sampler2D   u_moss;
 
 uniform vec2        u_resolution;
 uniform vec2        u_mouse;
@@ -24,7 +23,7 @@ void main (void) {
 	float f = smoothstep( 0.4, 0.6, sin(u_time    ) );
     float s = smoothstep( 0.4, 0.6, sin(u_time*0.5) );
 
-    color = sampleUntile(u_tex0, (2.0 + 1.0*s)*st + u_time*0.1, f );
+    color = sampleUntile(u_moss, (2.0 + 1.0*s)*st + u_time*0.1, f );
 
     gl_FragColor = color;
 }

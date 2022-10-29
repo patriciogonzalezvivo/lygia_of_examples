@@ -19,6 +19,7 @@ void main (void) {
     vec3 color = vec3(0.0);
     vec2 pixel = 1.0/u_resolution;
     vec2 st = gl_FragCoord.xy * pixel;
+    vec2 uv = vec2(st.x, 1.0 - st.y);
 
     vec2 center = vec2(0.5);
 
@@ -34,12 +35,12 @@ void main (void) {
     angle += u_time;
     dir = vec2(cos(angle), sin(angle));
 
-    color += radialBlur(u_tex0, st, pixel * dir, strength).rgb;
+    color += radialBlur(u_tex0, uv, pixel * dir, strength).rgb;
 
-    vec2 uv = vec2(fract(st.x * cols), st.y * cols) - 0.05;
-    uv *= 0.3;
+    vec2 uv2 = vec2(fract(st.x * cols), st.y * cols) - 0.05;
+    uv2 *= 0.3;
 
-    color += digits(uv, strength, 0.0);
+    color += digits(uv2, strength, 0.0);
     color -= step(.99, xf);
 
     gl_FragColor = vec4(color,1.0);

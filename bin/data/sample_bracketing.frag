@@ -4,8 +4,7 @@ precision mediump float;
 #endif
 
 
-uniform sampler2D   u_tex0;
-uniform vec2        u_tex0Resolution;
+uniform sampler2D   u_moss;
 
 uniform vec2        u_resolution;
 uniform vec2        u_mouse;
@@ -34,9 +33,9 @@ void main (void) {
     float scale = 1.;
 
     if (st.x > mouse.x)
-        color = sampleBracketing(u_tex0, st, dir, scale);
+        color = sampleBracketing(u_moss, st, dir, scale);
     else
-        color = texture2D(u_tex0, scale * rotate(st, dir));
+        color = texture2D(u_moss, scale * rotate(st, dir));
     
     // // Output vector field directly
     // color = max(0.8*color, 

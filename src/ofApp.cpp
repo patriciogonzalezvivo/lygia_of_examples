@@ -10,12 +10,11 @@ void ofApp::setup() {
     ofLoadImage(tex_moss, "imgs/moss.jpg");
     ofLoadImage(tex_lut, "imgs/lut.png");
     ofLoadImage(tex_noise, "imgs/noise_blue.png");
+    tex_moss.setTextureWrap(GL_REPEAT, GL_REPEAT);
 
-    // shader.load("billboard.vert","draw_digits.frag");
-    // shader.load("billboard.vert","animation_easing.frag");
-    // shader.load("billboard.vert","animation_sprite.frag");
-    // shader.load("billboard.vert","color_dither.frag");
-    shader.load("billboard.vert","filter_bilateralBlur2D.frag");
+    index = 0;
+    examples = { "draw_digits.frag", "lighting_atmosphere.frag", "animation_easing.frag","animation_sprite.frag","color_dither.frag","color_lut.frag","color_mix.frag","filter_bilateralBlur2D.frag","filter_boxBlur2D.frag","filter_edge2D.frag","filter_fibonacciBokeh.frag","filter_gaussianBlur2D.frag","filter_kuwahara2D.frag","filter_laplacian2D.frag","filter_median2D.frag","filter_noiseBlur2D.frag","filter_radialBlur2D.frag","filter_sharpen2D.frag","generative_cnoise.frag","generative_curl.frag","generative_fbm.frag","generative_noised.frag","generative_pnoise.frag","generative_random.frag","generative_snoise.frag","generative_voronoi.frag","generative_voronoise.frag","generative_worley.frag","sample_bracketing.frag","sample_untile.frag" };
+    shader.load("billboard.vert", examples[index%examples.size()]);
 
     billboard.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
     billboard.addVertex(ofPoint(-1.,-1));
@@ -59,7 +58,7 @@ void ofApp::draw() {
     shader.setUniform2f("u_spriteResolution", tex_sprite.getWidth(), tex_sprite.getHeight());
 
     shader.setUniform2f("u_resolution", width, height);
-    shader.setUniform2f("u_mouse", mouseX, mouseY);
+    shader.setUniform2f("u_mouse", (float)ofGetMouseX(), (float)ofGetMouseY());
     shader.setUniform1f("u_time", ofGetElapsedTimef());
 
     billboard.draw();
@@ -67,11 +66,18 @@ void ofApp::draw() {
     shader.end();
     ofPopMatrix();
 
+    ofDrawBitmapString(examples[index% examples.size()], 5, 20);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+    if (key == OF_KEY_LEFT || key == OF_KEY_UP)
+        index--;
+    else
+        index++;
+
+    shader.load("billboard.vert", examples[index% examples.size()]);
 }
 
 //--------------------------------------------------------------

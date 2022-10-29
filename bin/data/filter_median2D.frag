@@ -19,11 +19,12 @@ void main (void) {
     vec3 color = vec3(0.0);
     vec2 pixel = 1.0/u_resolution;
     vec2 st = gl_FragCoord.xy * pixel;
+    vec2 uv = vec2(st.x, 1.0 - st.y);
 
     float radius = fract(st.x * 2.0) * 4.0;
 
-    color = mix( median3(u_tex0, st, pixel * max(1., floor(radius))).rgb,
-                 median5(u_tex0, st, pixel * max(1., floor(radius))).rgb, 
+    color = mix( median3(u_tex0, uv, pixel * max(1., floor(radius))).rgb,
+                 median5(u_tex0, uv, pixel * max(1., floor(radius))).rgb, 
                  step(.5, st.x));
 
     color += digits(st - vec2(0.01 + 0.5 * step(.5, st.x), 0.01), mix(3., 5., step(.5, st.x)), 0.0);

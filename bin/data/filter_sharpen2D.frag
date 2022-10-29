@@ -15,17 +15,18 @@ void main (void) {
     vec3 color = vec3(0.0);
     vec2 pixel = 1.0/u_resolution;
     vec2 st = gl_FragCoord.xy * pixel;
+    vec2 uv = vec2(st.x, 1.0 - st.y);
 
     float radius = fract(st.x * 3.0) * 5.0;
 
     if (st.x < .33)
-        color = sharpenAdaptive(u_tex0, st, pixel * max(1.0, radius)).rgb;
+        color = sharpenAdaptive(u_tex0, uv, pixel * max(1.0, radius)).rgb;
 
     else if (st.x < .66)
-        color = sharpenContrastAdaptive(u_tex0, st, pixel * max(1.0, radius)).rgb;
+        color = sharpenContrastAdaptive(u_tex0, uv, pixel * max(1.0, radius)).rgb;
 
     else 
-        color = sharpenFast(u_tex0, st, pixel).rgb;
+        color = sharpenFast(u_tex0, uv, pixel).rgb;
 
         
     color -= step(.95, fract(radius) ) * 0.1;

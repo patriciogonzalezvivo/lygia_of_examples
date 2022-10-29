@@ -18,6 +18,7 @@ void main (void) {
     vec3 color = vec3(0.0);
     vec2 pixel = 1.0/u_resolution;
     vec2 st = gl_FragCoord.xy * pixel;
+    vec2 uv = st;
     st.y = 1.0 - st.y;
 
     float ix = floor(st.x * 5.0);
@@ -28,10 +29,10 @@ void main (void) {
     else
         color += edgeSobel(u_tex0, st, pixel * radius);
 
-    color -= step(st.y, 0.05) * 0.5;
+    color -= step(uv.y, 0.05) * 0.5;
     color = clamp(color, vec3(0.), vec3(1.));
-    color += digits(st - vec2(ix/5.0 + 0.01, 0.01), radius);
-    color -= step(.98, fract(st.x * 5.0));
+    color += digits(uv - vec2(ix/5.0 + 0.01, 0.01), radius);
+    color -= step(.98, fract(uv.x * 5.0));
 
     gl_FragColor = vec4(color,1.0);
 }

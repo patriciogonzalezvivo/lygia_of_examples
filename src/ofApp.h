@@ -20,13 +20,15 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
+	std::vector<std::string> examples;
+	size_t 		index;
+
+	ofShader	shader;
+	ofVboMesh	billboard;
+
 	ofTexture	tex_danny;
 	ofTexture	tex_sprite;
 	ofTexture	tex_moss;
 	ofTexture	tex_lut;
-	ofTexture	tex_noise;
-	
-	ofShader	shader;
-	ofVboMesh	billboard;
-		
+	ofTexture	tex_noise;		
 };

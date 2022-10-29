@@ -18,11 +18,12 @@ void main (void) {
     vec3 color = vec3(0.0);
     vec2 pixel = 1.0/u_resolution;
     vec2 st = gl_FragCoord.xy * pixel;
+    vec2 uv = vec2(st.x, 1.0 - st.y);
 
     float ix = floor(st.x * 5.0);
     float radius = max(1.0, ix * 3.0);
 
-    color += laplacian(u_tex0, st, pixel * radius).rgb * 0.5 + 0.5;
+    color += laplacian(u_tex0, uv, pixel * radius).rgb * 0.5 + 0.5;
 
     color -= digits(st - vec2(ix/5.0 + 0.01, 0.01), radius, 0.);
     color -= step(.99, fract(st.x * 5.0));

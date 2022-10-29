@@ -19,12 +19,12 @@ void main (void) {
     vec3 color = vec3(0.0);
     vec2 pixel = 1.0/u_resolution;
     vec2 st = gl_FragCoord.xy * pixel;
-    st.y = 1.0 - st.y;
+    vec2 uv = vec2(st.x, 1.0 - st.y);
 
     float ix = floor(st.x * 5.0);
     float kernel_size = max(1.0, ix * 4.0);
 
-    color += gaussianBlur(u_tex0, st, pixel, int(kernel_size)).rgb;
+    color += gaussianBlur(u_tex0, uv, pixel, int(kernel_size)).rgb;
 
     color += digits(st - vec2(ix/5.0 + 0.01, 0.01), kernel_size, 0.0);
     color -= step(.99, fract(st.x * 5.0));
