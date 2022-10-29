@@ -24,6 +24,7 @@ public:
 	ofTexture	tex_sprite;
 	ofTexture	tex_moss;
 	ofTexture	tex_lut;
+	ofTexture	tex_noise;
 	
 	ofShader	shader;
 	ofVboMesh	billboard;

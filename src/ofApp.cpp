@@ -5,10 +5,11 @@ void ofApp::setup() {
     ofSetVerticalSync(true);
     
     ofDisableArbTex();
-    ofLoadImage(tex_danny, "danny.png");
-    ofLoadImage(tex_sprite, "sprite.png");
-    ofLoadImage(tex_moss, "moss.jpg");
-    ofLoadImage(tex_lut, "lut.png");
+    ofLoadImage(tex_danny, "imgs/danny.png");
+    ofLoadImage(tex_sprite, "imgs/sprite.png");
+    ofLoadImage(tex_moss, "imgs/moss.jpg");
+    ofLoadImage(tex_lut, "imgs/lut.png");
+    ofLoadImage(tex_noise, "imgs/noise_blue.png");
 
     // shader.load("billboard.vert","draw_digits.frag");
     // shader.load("billboard.vert","animation_easing.frag");
@@ -53,7 +54,8 @@ void ofApp::draw() {
     shader.setUniformTexture("u_tex0", tex_danny, 0);
     shader.setUniformTexture("u_lut", tex_lut, 1);
     shader.setUniformTexture("u_moss", tex_moss, 2);
-    shader.setUniformTexture("u_sprite", tex_sprite, 3);
+    shader.setUniformTexture("u_noise", tex_noise, 3);
+    shader.setUniformTexture("u_sprite", tex_sprite, 4);
     shader.setUniform2f("u_spriteResolution", tex_sprite.getWidth(), tex_sprite.getHeight());
 
     shader.setUniform2f("u_resolution", width, height);
