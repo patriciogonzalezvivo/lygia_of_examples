@@ -60,7 +60,8 @@ void ofApp::draw() {
     shader.setUniform2f("u_resolution", width, height);
     shader.setUniform2f("u_mouse", (float)ofGetMouseX(), (float)ofGetMouseY());
     shader.setUniform1f("u_time", ofGetElapsedTimef());
-
+    
+    ofScale(width*0.5, height*0.5, 1);
     billboard.draw();
 
     shader.end();
