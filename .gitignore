@@ -1,3 +1,6 @@
+bin/libfmod.so 
+bin/lygia_of_examples
+
 # Some general ignore patterns
 build/
 obj/
