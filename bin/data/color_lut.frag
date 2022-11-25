@@ -1,5 +1,5 @@
-
 #version 120
+
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -12,9 +12,7 @@ uniform vec2        u_mouse;
 uniform float       u_time;
 
 #define LUT_SQUARE
-// #define LUT_FLIP_Y
-#define LUT_CELL_SIZE 64.0
-#define LUT_CELLS_PER_SIDE 8.0
+#define LUT_FLIP_Y
 #include "lygia/color/lut.glsl"
 
 void main(void) {
