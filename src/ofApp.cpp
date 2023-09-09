@@ -51,6 +51,7 @@ void ofApp::draw() {
     ofTranslate(center);
     shader.begin();
     shader.setUniformTexture("u_tex0", tex_danny, 0);
+        shader.setUniform2f("u_tex0Resolution", tex_danny.getWidth(), tex_danny.getHeight());
     shader.setUniformTexture("u_lut", tex_lut, 1);
     shader.setUniformTexture("u_moss", tex_moss, 2);
     shader.setUniformTexture("u_noise", tex_noise, 3);
